@@ -10,14 +10,14 @@ pipeline {
         
         stage('Copy Ansible Files') {
             steps {
-                sh 'cp /home/vkambalapalli/ansi-train/inventory.ini .'
-                sh 'cp /home/vkambalapalli/ansi-train/deploy.yml .'
+                sh 'cp /home/vkambalapalli/ansi-train/serverdetail .'
+                sh 'cp /home/vkambalapalli/ansi-train/web_app.yml .'
             }
         }
         
         stage('Ansible Deployment') {
             steps {
-                sh 'ansible-playbook -i inventory.ini deploy.yml'
+                sh 'ansible-playbook -i serverdetail web_app.yml'
             }
         }
     }
