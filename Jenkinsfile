@@ -2,9 +2,22 @@ pipeline {
     agent any
     
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('Copy Ansible Files') {
+            steps {
+                sh 'cp /home/vkambalapalli/ansi-train/inventory.ini .'
+                sh 'cp /home/vkambalapalli/ansi-train/deploy.yml .'
+            }
+        }
+        
         stage('Ansible Deployment') {
             steps {
-                sh 'ansible-playbook /home/vkambalapalli/ansi-train/web_app.yml -i /home/vkambalapalli/ansi-train/serverdetail'
+                sh 'ansible-playbook -i inventory.ini deploy.yml'
             }
         }
     }
