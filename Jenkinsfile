@@ -15,12 +15,14 @@ pipeline {
                         sh 'whoami'
                         sh 'pwd'
                         sh 'ls -l /var/lib/jenkins/workspace'
+                        sh 'chmod -R 755 /home/vkambalapalli/terra-proj2'
                         sh 'terraform init'
                         sh 'terraform apply -auto-approve'
                     }
                 }
             }
         }
+
         stage('Ansible Deployment') {
             steps {
                 script {
