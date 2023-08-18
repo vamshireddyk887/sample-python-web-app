@@ -21,12 +21,15 @@ pipeline {
         }
 
         stage('Ansible Deployment') {
-            steps {
+           steps {
+              dir('/home/vkambalapalli/ansi-train') {
                 script {
-                    sh 'ls -l /home/vkambalapalli/ansi-train'
-                    sh 'ansible-playbook -i localhost, -c local /home/vkambalapalli/ansi-train/web_app.yml'
-                }
+                sh 'ls -l'
+                sh 'ansible-playbook -i localhost web_app.yml'
             }
         }
+    }
+}
+
     }
 }
