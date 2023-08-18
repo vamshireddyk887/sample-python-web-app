@@ -7,15 +7,16 @@ pipeline {
             }
         }
 
-        stage('Terraform init and Apply') {
+        stage('Terraform Setup and Apply') {
             steps {
                 script {
-                    sh 'terraform init'
-                    sh 'terraform apply -auto-approve'
+                    dir('/home/vkambalapalli/terra-proj2') {
+                        sh 'terraform init'
+                        sh 'terraform apply -auto-approve'
+                    }
                 }
             }
         }
-
         stage('Ansible Deployment') {
             steps {
                 script {
