@@ -1,23 +1,27 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        
-        stage('Copy Ansible Files') {
+
+        stage('Terraform Setup and Apply') {
             steps {
-                sh 'cp /home/vkambalapalli/ansi-train/serverdetail .'
-                sh 'cp /home/vkambalapalli/ansi-train/web_app.yml .'
+                script {
+                    sh 'terraform init'
+                    sh 'terraform apply -auto-approve'
+                }
             }
         }
-        
+
         stage('Ansible Deployment') {
             steps {
-                sh 'ansible-playbook -i serverdetail web_app.yml'
+                script {
+                    sh 'ansible-playbook -i localhost, -c local /home/vkambalapalli/ansi-train/web_app.yml'
+                }
             }
         }
     }
