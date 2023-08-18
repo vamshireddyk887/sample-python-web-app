@@ -7,7 +7,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Setup and Apply') {
+        stage('Terraform init and Apply') {
             steps {
                 script {
                     sh 'terraform init'
