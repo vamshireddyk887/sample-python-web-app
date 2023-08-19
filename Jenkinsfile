@@ -24,9 +24,6 @@ pipeline {
           steps {
             dir('/home/vkambalapalli/ansi-train') {
                 script {
-                sh "echo aws_access_key_id: \${aws_access_key_id}"
-                sh "echo aws_secret_access_key: \${aws_secret_access_key}"
-                sh "echo aws_region: \${aws_region}"
                 sh 'ansible-playbook -i /home/vkambalapalli/ansible-scripts/ec2.py web_app.yml'
             }
         }
